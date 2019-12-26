@@ -31,7 +31,7 @@ namespace WindowsFormsCars
         {
             if (p._places.Count == p._maxCount)
             {
-                return -1;
+                throw new ParkingOverflowException();
             }
 
             for (int i = 0; i < p._maxCount; i++)
@@ -56,6 +56,7 @@ namespace WindowsFormsCars
                 return car;
             }
             return null;
+            throw new ParkingNotFoundException(index);
         }
 
         public T this[int ind]
@@ -77,6 +78,8 @@ namespace WindowsFormsCars
                                              ind % 5 * _placeSizeHeight + 15, PictureWidth,
                                              PictureHeight);
                 }
+                else
+                    throw new ParkingOccupiedPlaceException(ind);
             }
         }
 
