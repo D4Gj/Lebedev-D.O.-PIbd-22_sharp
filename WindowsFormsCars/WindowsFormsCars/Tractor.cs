@@ -75,7 +75,7 @@ namespace WindowsFormsCars
 
 
 
-            //задние фары
+            //задние фары рисовка
             Brush brStopLights = new SolidBrush(Color.Red);
             g.FillEllipse(brStopLights, _startPosX + 12, _startPosY + 31, 9, 9);
             //кузов
