@@ -64,6 +64,7 @@ namespace WindowsFormsCars
                     tractor.MoveTransport(Direction.Down);
                     break;
             }
+
             Draw();
         }
     }
