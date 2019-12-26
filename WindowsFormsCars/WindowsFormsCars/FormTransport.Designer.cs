@@ -1,6 +1,6 @@
 ﻿namespace WindowsFormsCars
 {
-    partial class FormET
+    partial class FormTransport
     {
         private System.ComponentModel.IContainer components = null;
 

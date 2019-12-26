@@ -48,11 +48,11 @@
   <ItemGroup>
     <Compile Include="Direction.cs" />
     <Compile Include="ExcavatorTractor.cs" />
-    <Compile Include="FormET.cs">
+    <Compile Include="FormTransport.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormET.Designer.cs">
-      <DependentUpon>FormET.cs</DependentUpon>
+    <Compile Include="FormTransport.Designer.cs">
+      <DependentUpon>FormTransport.cs</DependentUpon>
     </Compile>
     <Compile Include="ITransport.cs" />
     <Compile Include="Program.cs" />
