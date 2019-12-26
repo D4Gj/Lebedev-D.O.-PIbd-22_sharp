@@ -130,5 +130,10 @@ namespace WindowsFormsCars
                 return null;
             }
         }
+
+        public void Sort()
+        {
+            parkingStages.Sort();
+        }
     }
 }
