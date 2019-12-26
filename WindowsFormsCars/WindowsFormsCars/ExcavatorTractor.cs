@@ -13,6 +13,7 @@ namespace WindowsFormsCars
         public bool RearLadle { private set; get; }
         public bool FrontLadle { private set; get; }
         public bool Pipe { private set; get; }
+
         public ExcavatorTractor(int maxSpeed, float weight, Color mainColor, Color extrColor,
             bool rearLadle, bool frontLadle, bool pipe) : base(maxSpeed, weight, mainColor)
         {
@@ -20,6 +21,21 @@ namespace WindowsFormsCars
             RearLadle = rearLadle;
             FrontLadle = frontLadle;
             Pipe = pipe;
+        }
+
+        public ExcavatorTractor(string info) : base(info)
+        {
+            string[] strs = info.Split(';');
+            if (strs.Length == 7)
+            {
+                MaxSpeed = Convert.ToInt32(strs[0]);
+                Weight = Convert.ToInt32(strs[1]);
+                MainColor = Color.FromName(strs[2]);
+                DopColor = Color.FromName(strs[3]);
+                RearLadle = Convert.ToBoolean(strs[4]);
+                FrontLadle = Convert.ToBoolean(strs[5]);
+                Pipe = Convert.ToBoolean(strs[6]);
+            }
         }
         public override void Draw(Graphics g)
         {
@@ -108,6 +124,11 @@ namespace WindowsFormsCars
         public void SetDopColor(Color color)
         {
             DopColor = color;
+        }
+        public override string ToString()
+        {
+            return base.ToString() + ";" + DopColor.Name + ";" + RearLadle + ";" +
+                    FrontLadle + ";" + Pipe;
         }
     }
 }
