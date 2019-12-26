@@ -10,11 +10,11 @@ using System.Windows.Forms;
 
 namespace WindowsFormsCars
 {
-    public partial class FormTransport : Form
+    public partial class FormET : Form
     {
         ITransport tractor;
 
-        public FormTransport()
+        public FormET()
         {
             InitializeComponent();
         }
