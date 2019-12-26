@@ -53,7 +53,6 @@ namespace WindowsFormsCars
                     excavatorTractor.MoveTransport(Direction.Down);
                     break;
             }
-
             Draw();
         }
     }

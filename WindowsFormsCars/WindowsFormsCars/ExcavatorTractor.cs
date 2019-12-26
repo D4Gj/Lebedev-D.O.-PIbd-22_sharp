@@ -159,7 +159,6 @@ namespace WindowsFormsCars
             g.DrawEllipse(penBody, _startPosX + 70, _startPosY + 50, 10, 10);
             g.DrawEllipse(penBody, _startPosX + 60, _startPosY + 50, 10, 10);
             g.DrawEllipse(penBody, _startPosX + 25, _startPosY + 50, 10, 10);
-
             // задняя фара окантовка
             g.DrawArc(penBody, _startPosX + 12, _startPosY + 30, 10, 10, 180, 360);
             // передняя фара окантовка 
