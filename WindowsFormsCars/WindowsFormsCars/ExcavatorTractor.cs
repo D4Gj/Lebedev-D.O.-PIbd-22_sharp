@@ -7,82 +7,28 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsCars
 {
-    public class ExcavatorTractor
+    public class ExcavatorTractor : Tractor
     {
-        private float _startPosX;
-        private float _startPosY;
-        private int _pictureWidth;
-        private int _pictureHeight;
-        private const int etWidth = 90;
-        private const int etHeight = 50;
-        public int MaxSpeed { private set; get; }
-        public float Weight { private set; get; }
-        public Color MainColor;
-        public Color DopColor;
-        public bool Pipe;
-        public bool FrontLadle;
-        public bool RearLadle;
-
-        public ExcavatorTractor(int maxSpeed, float weight, Color mainColor,
-            Color dopColor, bool pipe, bool frontLadle, bool rearLadle)
+        public Color ExtrColor { private set; get; }
+        public bool RearLadle { private set; get; }
+        public bool FrontLadle { private set; get; }
+        public bool Pipe { private set; get; }
+        public ExcavatorTractor(int maxSpeed, float weight, Color mainColor, Color extrColor,
+            bool rearLadle, bool frontLadle, bool pipe) : base(maxSpeed, weight, mainColor)
         {
-            MaxSpeed = maxSpeed;
-            Weight = weight;
-            MainColor = mainColor;
-            DopColor = dopColor;
-            Pipe = pipe;
-            FrontLadle = frontLadle;
+            ExtrColor = extrColor;
             RearLadle = rearLadle;
+            FrontLadle = frontLadle;
+            Pipe = pipe;
         }
-
-        public void SetPosition(int x, int y, int width, int height)
+        public override void Draw(Graphics g)
         {
-            _startPosX = x;
-            _startPosY = y;
-            _pictureWidth = width;
-            _pictureHeight = height;
-        }
-
-        public void MoveTransport(Direction direction)
-        {
-            float step = MaxSpeed * 100 / Weight;
-            switch (direction)
-            {
-                case Direction.Right:
-                    if (_startPosX + step < _pictureWidth - etWidth)
-                    {
-                        _startPosX += step;
-                    }
-                    break;
-                case Direction.Left:
-                    if (_startPosX - step > 5)
-                    {
-                        _startPosX -= step;
-                    }
-                    break;
-                case Direction.Up:
-                    if (_startPosY - step > 0)
-                    {
-                        _startPosY -= step;
-                    }
-                    break;
-                case Direction.Down:
-                    if (_startPosY + step < _pictureHeight - etHeight)
-                    {
-                        _startPosY += step;
-                    }
-                    break;
-            }
-        }
-        public void DrawET(Graphics g)
-        {
-
             if (FrontLadle)
             {
-                Brush brLadle = new SolidBrush(DopColor);
+                Brush brLadle = new SolidBrush(ExtrColor);
                 Brush brLadleblack = new SolidBrush(Color.Black);
                 Pen penLadle = new Pen(Color.Black);
-                Pen penLadleIN = new Pen(DopColor);
+                Pen penLadleIN = new Pen(ExtrColor);
                 for (int i = 1; i < 14; i++)
                 {
                     g.DrawLine(penLadleIN, _startPosX + 60 + i, _startPosY + 30, _startPosX + 85 + i / 2, _startPosY + 5);
@@ -112,10 +58,10 @@ namespace WindowsFormsCars
             }
             if (RearLadle)
             {
-                Brush brLadle = new SolidBrush(DopColor);
+                Brush brLadle = new SolidBrush(ExtrColor);
                 Brush brLadleblack = new SolidBrush(Color.Black);
                 Pen penLadle = new Pen(Color.Black);
-                Pen penLadleIN = new Pen(DopColor);
+                Pen penLadleIN = new Pen(ExtrColor);
                 for (int i = 0; i < 10; ++i)
                 {
                     g.DrawLine(penLadleIN, _startPosX + 16, _startPosY + 33 + i, _startPosX + 5 + i / 2, _startPosY + 5 - i / 2);
@@ -142,46 +88,8 @@ namespace WindowsFormsCars
 
                 g.DrawLine(penLadle, _startPosX + 4, _startPosY + 1, _startPosX + 4, _startPosY + 35);
                 g.DrawLine(penLadle, _startPosX + 7, _startPosY + 1, _startPosX + 7, _startPosY + 35);
-
             }
-            // теперь отрисуем основной кузов 
-            //границы трактора
-            Pen penBody = new Pen(Color.Black);
-            Brush brBody = new SolidBrush(Color.Black);
-            g.DrawRectangle(penBody, _startPosX + 15, _startPosY, 25, 45);
-            g.DrawRectangle(penBody, _startPosX + 15, _startPosY + 25, 65, 20);
-            // гусеницы
-            g.DrawRectangle(penBody, _startPosX + 35, _startPosY + 45, 25, 10);
-            g.FillRectangle(brBody, _startPosX + 35, _startPosY + 45, 25, 10);
-            g.DrawRectangle(penBody, _startPosX + 20, _startPosY + 50, 55, 10);
-
-            g.DrawEllipse(penBody, _startPosX + 15, _startPosY + 50, 10, 10);
-            g.DrawEllipse(penBody, _startPosX + 70, _startPosY + 50, 10, 10);
-            g.DrawEllipse(penBody, _startPosX + 60, _startPosY + 50, 10, 10);
-            g.DrawEllipse(penBody, _startPosX + 25, _startPosY + 50, 10, 10);
-
-            // задняя фара окантовка
-            g.DrawArc(penBody, _startPosX + 12, _startPosY + 30, 10, 10, 180, 360);
-            // передняя фара окантовка 
-            g.DrawArc(penBody, _startPosX + 75, _startPosY + 35, 8, 8, 270, 180);
-            //задние фары
-            Brush brStopLights = new SolidBrush(Color.Red);
-            g.FillEllipse(brStopLights, _startPosX + 12, _startPosY + 31, 9, 9);
-            //кузов
-            Brush brMain = new SolidBrush(MainColor);
-            g.FillRectangle(brMain, _startPosX + 16, _startPosY + 1, 24, 44);
-            g.FillRectangle(brMain, _startPosX + 16, _startPosY + 26, 64, 19);
-            // wheels
-            Brush brWhl = new SolidBrush(Color.Black);
-            g.FillEllipse(brWhl, _startPosX + 16, _startPosY + 51, 8, 8);
-            g.FillEllipse(brWhl, _startPosX + 71, _startPosY + 51, 8, 8);
-            g.FillEllipse(brWhl, _startPosX + 61, _startPosY + 51, 8, 8);
-            g.FillEllipse(brWhl, _startPosX + 26, _startPosY + 51, 8, 8);
-            //стекла
-            Brush brBlue = new SolidBrush(Color.LightBlue);
-            g.FillRectangle(brBlue, _startPosX + 20, _startPosY + 5, 20, 15);
-            g.DrawLine(penBody, _startPosX + 35, _startPosY + 25, _startPosX + 40, _startPosY + 30);
-            g.DrawLine(penBody, _startPosX + 40, _startPosY + 30, _startPosX + 35, _startPosY + 35);
+            base.Draw(g);
 
             if (Pipe)
             {

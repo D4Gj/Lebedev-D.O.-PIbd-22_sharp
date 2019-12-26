@@ -10,11 +10,11 @@ using System.Windows.Forms;
 
 namespace WindowsFormsCars
 {
-    public partial class FormET : Form
+    public partial class FormTransport : Form
     {
-        ExcavatorTractor excavatorTractor;
+        ITransport tractor;
 
-        public FormET()
+        public FormTransport()
         {
             InitializeComponent();
         }
@@ -23,15 +23,26 @@ namespace WindowsFormsCars
         {
             Bitmap bmp = new Bitmap(pictureBoxET.Width, pictureBoxET.Height);
             Graphics gr = Graphics.FromImage(bmp);
-            excavatorTractor.DrawET(gr); pictureBoxET.Image = bmp;
+            tractor.Draw(gr); pictureBoxET.Image = bmp;
         }
 
         private void buttonCreate_Click(object sender, EventArgs e)
         {
+            string name = (sender as Button).Name;
             Random rnd = new Random();
-            excavatorTractor = new ExcavatorTractor(rnd.Next(100, 300), rnd.Next(1000, 2000),
-             Color.Black, Color.Blue, true, true, true);
-            excavatorTractor.SetPosition(rnd.Next(10, 100), 150, pictureBoxET.Width, pictureBoxET.Height);
+
+            switch (name)
+            {
+                case "buttonCreateT":
+                    tractor = new Tractor(rnd.Next(100, 300), rnd.Next(1000, 2000), Color.Blue);
+                    break;
+                case "buttonCreateET":
+                    tractor = new ExcavatorTractor(rnd.Next(100, 300), rnd.Next(1000, 2000),
+               Color.Blue, Color.Blue, true, true, true);
+                    break;
+            }
+
+            tractor.SetPosition(rnd.Next(10, 100), 150, pictureBoxET.Width, pictureBoxET.Height);
             Draw();
         }
 
@@ -41,16 +52,16 @@ namespace WindowsFormsCars
             switch (name)
             {
                 case "buttonLeft":
-                    excavatorTractor.MoveTransport(Direction.Left);
+                    tractor.MoveTransport(Direction.Left);
                     break;
                 case "buttonRight":
-                    excavatorTractor.MoveTransport(Direction.Right);
+                    tractor.MoveTransport(Direction.Right);
                     break;
                 case "buttonUp":
-                    excavatorTractor.MoveTransport(Direction.Up);
+                    tractor.MoveTransport(Direction.Up);
                     break;
                 case "buttonDown":
-                    excavatorTractor.MoveTransport(Direction.Down);
+                    tractor.MoveTransport(Direction.Down);
                     break;
             }
 
