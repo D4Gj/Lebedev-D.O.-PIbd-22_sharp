@@ -72,9 +72,6 @@ namespace WindowsFormsCars
             g.DrawArc(penBody, _startPosX + 12, _startPosY + 30, 10, 10, 180, 360);
             // передняя фара окантовка 
             g.DrawArc(penBody, _startPosX + 75, _startPosY + 35, 8, 8, 270, 180);
-
-
-
             //задние фары
             Brush brStopLights = new SolidBrush(Color.Red);
             g.FillEllipse(brStopLights, _startPosX + 12, _startPosY + 31, 9, 9);
