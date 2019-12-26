@@ -9,14 +9,14 @@ namespace WindowsFormsCars
 {
     public class ExcavatorTractor : Tractor
     {
-        public Color ExtrColor { private set; get; }
+        public Color DopColor { private set; get; }
         public bool RearLadle { private set; get; }
         public bool FrontLadle { private set; get; }
         public bool Pipe { private set; get; }
         public ExcavatorTractor(int maxSpeed, float weight, Color mainColor, Color extrColor,
             bool rearLadle, bool frontLadle, bool pipe) : base(maxSpeed, weight, mainColor)
         {
-            ExtrColor = extrColor;
+            DopColor = extrColor;
             RearLadle = rearLadle;
             FrontLadle = frontLadle;
             Pipe = pipe;
@@ -25,10 +25,10 @@ namespace WindowsFormsCars
         {
             if (FrontLadle)
             {
-                Brush brLadle = new SolidBrush(ExtrColor);
+                Brush brLadle = new SolidBrush(DopColor);
                 Brush brLadleblack = new SolidBrush(Color.Black);
                 Pen penLadle = new Pen(Color.Black);
-                Pen penLadleIN = new Pen(ExtrColor);
+                Pen penLadleIN = new Pen(DopColor);
                 for (int i = 1; i < 14; i++)
                 {
                     g.DrawLine(penLadleIN, _startPosX + 60 + i, _startPosY + 30, _startPosX + 85 + i / 2, _startPosY + 5);
@@ -58,10 +58,10 @@ namespace WindowsFormsCars
             }
             if (RearLadle)
             {
-                Brush brLadle = new SolidBrush(ExtrColor);
+                Brush brLadle = new SolidBrush(DopColor);
                 Brush brLadleblack = new SolidBrush(Color.Black);
                 Pen penLadle = new Pen(Color.Black);
-                Pen penLadleIN = new Pen(ExtrColor);
+                Pen penLadleIN = new Pen(DopColor);
                 for (int i = 0; i < 10; ++i)
                 {
                     g.DrawLine(penLadleIN, _startPosX + 16, _startPosY + 33 + i, _startPosX + 5 + i / 2, _startPosY + 5 - i / 2);
@@ -104,6 +104,10 @@ namespace WindowsFormsCars
                 g.DrawLine(penPipe, _startPosX + 57, _startPosY + 15, _startPosX + 59, _startPosY + 12);
                 g.DrawLine(penPipe, _startPosX + 60, _startPosY + 15, _startPosX + 61, _startPosY + 12);
             }
+        }
+        public void SetDopColor(Color color)
+        {
+            DopColor = color;
         }
     }
 }

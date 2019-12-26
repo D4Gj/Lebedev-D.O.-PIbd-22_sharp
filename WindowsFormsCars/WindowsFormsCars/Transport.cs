@@ -25,6 +25,11 @@ namespace WindowsFormsCars
             _pictureHeight = height;
         }
 
+        public void SetMainColor(Color color)
+        {
+            MainColor = color;
+        }
+
         abstract public void MoveTransport(Direction direction);
         abstract public void Draw(Graphics g);
     }
