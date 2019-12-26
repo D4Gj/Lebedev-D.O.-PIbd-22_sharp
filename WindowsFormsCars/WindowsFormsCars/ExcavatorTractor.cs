@@ -89,8 +89,8 @@ namespace WindowsFormsCars
                 g.DrawLine(penLadle, _startPosX + 4, _startPosY + 1, _startPosX + 4, _startPosY + 35);
                 g.DrawLine(penLadle, _startPosX + 7, _startPosY + 1, _startPosX + 7, _startPosY + 35);
             }
-            base.Draw(g);
 
+            base.Draw(g);
             if (Pipe)
             {
                 Pen penPipe = new Pen(Color.Black);
