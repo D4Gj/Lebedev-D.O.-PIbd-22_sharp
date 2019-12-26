@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsCars
 {
-    public class ExcavatorTractor : Tractor
+    public class ExcavatorTractor : Tractor, IComparable<ExcavatorTractor>, IEquatable<ExcavatorTractor>
     {
         public Color DopColor { private set; get; }
         public bool RearLadle { private set; get; }
@@ -129,6 +129,78 @@ namespace WindowsFormsCars
         {
             return base.ToString() + ";" + DopColor.Name + ";" + RearLadle + ";" +
                     FrontLadle + ";" + Pipe;
+        }
+
+        public int CompareTo(ExcavatorTractor other)
+        {
+            var res = (this is Tractor).CompareTo(other is Tractor);
+            if (res != 0)
+            {
+                return res;
+            }
+            if (DopColor != other.DopColor)
+            {
+                DopColor.Name.CompareTo(other.DopColor.Name);
+            }
+            if (FrontLadle != other.FrontLadle)
+            {
+                return FrontLadle.CompareTo(other.FrontLadle);
+            }
+            if (RearLadle != other.RearLadle)
+            {
+                return RearLadle.CompareTo(other.RearLadle);
+            }
+            if (Pipe != other.Pipe)
+            {
+                return Pipe.CompareTo(other.Pipe);
+            }
+            return 0;
+        }
+
+        public bool Equals(ExcavatorTractor other)
+        {
+            var res = (this as Tractor).Equals(other as Tractor);
+            if (!res)
+            {
+                return res;
+            }
+            if (GetType().Name != other.GetType().Name)
+            {
+                return false;
+            }
+            if (DopColor != other.DopColor)
+            {
+                return false;
+            }
+            if (RearLadle != other.RearLadle)
+            {
+                return false;
+            }
+            if (FrontLadle != other.FrontLadle)
+            {
+                return false;
+            }
+            if (Pipe != other.Pipe)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public override bool Equals(Object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+            if (!(obj is ExcavatorTractor tractorObj))
+            {
+                return false;
+            }
+            else
+            {
+                return Equals(tractorObj);
+            }
         }
     }
 }
